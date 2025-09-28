@@ -32,11 +32,12 @@ class MyHomePage extends StatelessWidget {
         storyChildren: [
           StoryWidget(
             url:
-                "https://www.shutterstock.com/image-photo/demo-text-message-magnifying-glass-600nw-2491336635.jpg",
+                "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
           ),
+          StoryWidget(url: "https://picsum.photos/id/237/536/354.jpg"),
           StoryWidget(
             url:
-                "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                "https://www.shutterstock.com/image-photo/demo-text-message-magnifying-glass-600nw-2491336635.jpg",
           ),
         ],
       ),

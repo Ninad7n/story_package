@@ -6,7 +6,7 @@ class StoryProvider extends ChangeNotifier {
   bool isVideoMute = false;
   bool isDetailsLoading = false;
   int currentIndex = 0;
-  int durationCurrentStory = 0;
+  int durationCurrentStory = 3000;
   int currentProductScrollIndex = 0;
   PageController innerPageController = PageController();
   List<String> viewedData = [];
@@ -18,7 +18,7 @@ class StoryProvider extends ChangeNotifier {
   }
 
   updateDuration(int? duartion) {
-    durationCurrentStory = duartion ?? 30000;
+    durationCurrentStory = duartion ?? 3000;
     notifyListeners();
   }
 
@@ -34,7 +34,7 @@ class StoryProvider extends ChangeNotifier {
         curve: Curves.linear,
       );
     }
-    durationCurrentStory = 0;
+    // durationCurrentStory = 0;
     notifyListeners();
   }
 

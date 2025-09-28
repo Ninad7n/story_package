@@ -2,18 +2,18 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-
 class LinearTimer extends StatefulWidget {
   final int durationMiliseconds;
   final Function onTimerFinish;
 
-  const LinearTimer(
-      {Key? key,
-      required this.durationMiliseconds,
-      required this.onTimerFinish})
-      : super(key: key);
+  const LinearTimer({
+    super.key,
+    required this.durationMiliseconds,
+    required this.onTimerFinish,
+  });
 
   @override
+  // ignore: library_private_types_in_public_api
   _LinearTimerState createState() => _LinearTimerState();
 }
 
@@ -40,16 +40,17 @@ class _LinearTimerState extends State<LinearTimer> {
 
   void startTimer() {
     Timer.periodic(Duration(milliseconds: durationMiliseconds), (timer) {
-      if (mounted)
+      if (mounted) {
         setState(() {
           if (_milisecondsRemaining < widget.durationMiliseconds) {
             _milisecondsRemaining += durationMiliseconds;
-            _barWidth =  _milisecondsRemaining / widget.durationMiliseconds;
+            _barWidth = _milisecondsRemaining / widget.durationMiliseconds;
           } else {
             widget.onTimerFinish();
             timer.cancel();
           }
         });
+      }
     });
   }
 
@@ -79,7 +80,7 @@ class _LinearTimerState extends State<LinearTimer> {
           ),
         ),
       ),
-      
+
       /* StreamBuilder(
           stream: Get.find<StoriesController>().durationPauseStream.stream,
           builder: (context, snap) {

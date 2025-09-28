@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:story_package/componants/story_widget.dart';
@@ -18,14 +17,6 @@ class _StoryViewState extends State<StoryView> {
   PageController pageController = PageController(initialPage: 0);
 
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      Provider.of<StoryProvider>(context).updateCurrenIndex(0);
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => StoryProvider(),
@@ -41,22 +32,22 @@ class _StoryViewState extends State<StoryView> {
               },
               child: Stack(
                 children: [
-                  if (!state.isDetailsLoading)
-                    PageView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      controller: state.innerPageController,
-                      itemCount: widget.storyChildren.length,
-                      onPageChanged: (value) {
-                        state.updateCurrenIndex(value);
-                        // if (widget.storyChildren.length == value + 1) {
-                        //   log("LAST STORY");
-                        //   // Get.find<StoriesController>().setViewedStories(widget.id);
-                        // }
-                      },
-                      itemBuilder: (BuildContext context, int index) {
-                        return widget.storyChildren[index];
-                      },
-                    ),
+                  // if (!state.isDetailsLoading)
+                  PageView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    controller: state.innerPageController,
+                    itemCount: widget.storyChildren.length,
+                    onPageChanged: (value) {
+                      state.updateCurrenIndex(value);
+                      // if (widget.storyChildren.length == value + 1) {
+                      //   log("LAST STORY");
+                      //   // Get.find<StoriesController>().setViewedStories(widget.id);
+                      // }
+                    },
+                    itemBuilder: (BuildContext context, int index) {
+                      return widget.storyChildren[index];
+                    },
+                  ),
                   if (!state.isDetailsLoading)
                     Padding(
                       padding: const EdgeInsets.only(top: 6, left: 6),
@@ -66,9 +57,27 @@ class _StoryViewState extends State<StoryView> {
                                   widget.storyChildren.indexOf(e)
                               ? Expanded(
                                   child: LinearTimer(
-                                    onTimerFinish: () {},
+                                    onTimerFinish: () {
+                                      state.onNextStory(
+                                        widget.storyChildren.length,
+                                      );
+                                    },
                                     durationMiliseconds:
                                         state.durationCurrentStory,
+                                  ),
+                                )
+                              : state.currentIndex >
+                                    widget.storyChildren.indexOf(e)
+                              ? Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 6),
+                                    child: Container(
+                                      height: 3,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white60,
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                    ),
                                   ),
                                 )
                               : Expanded(
@@ -77,7 +86,7 @@ class _StoryViewState extends State<StoryView> {
                                     child: Container(
                                       height: 3,
                                       decoration: BoxDecoration(
-                                        color: Colors.white,
+                                        color: Colors.grey,
                                         borderRadius: BorderRadius.circular(15),
                                       ),
                                     ),
@@ -143,7 +152,7 @@ class _StoryViewState extends State<StoryView> {
                             shape: BoxShape.circle,
                           ),
                           child: Center(
-                            child: ClipRRect(
+                            /* child: ClipRRect(
                               borderRadius: BorderRadius.circular(400),
                               child: CachedNetworkImage(
                                 height: 45,
@@ -151,7 +160,7 @@ class _StoryViewState extends State<StoryView> {
                                 imageUrl: "",
                                 fit: BoxFit.cover,
                               ),
-                            ),
+                            ), */
                           ),
                         ),
                         SizedBox(width: 4),

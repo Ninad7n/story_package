@@ -35,10 +35,10 @@ class _StoryVideoPlayerState extends State<StoryVideoPlayer> {
       try {
         if (context.mounted) {
           if (ModalRoute.of(context)?.isCurrent ?? false) {
-            // vController!.play();
+            vController!.play();
             vController!.setVolume(1);
           } else {
-            // vController!.pause();
+            vController!.pause();
             vController!.setVolume(0);
           }
         }
@@ -65,7 +65,7 @@ class _StoryVideoPlayerState extends State<StoryVideoPlayer> {
             !vController!.value.isInitialized ||
             // ignore: unnecessary_null_comparison
             vController!.value.duration == null
-        ? Center(child: CircularProgressIndicator(color: Colors.white))
+        ? Center(child: CircularProgressIndicator(color: Colors.red))
         : Stack(
             children: [
               // StreamBuilder(
@@ -81,7 +81,6 @@ class _StoryVideoPlayerState extends State<StoryVideoPlayer> {
               //   },
               // ),
               VideoPlayer(vController!),
-              SizedBox(height: 10),
               // if (duration != null)
               //   LinearTimer(
               //     onTimerFinish: () {

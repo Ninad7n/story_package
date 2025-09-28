@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:story_package/controller/story_provider.dart';
 import 'package:story_package/widgets/video_player.dart';
 
-class StoryWidget extends StatelessWidget {
+class StoryWidget extends StatefulWidget {
   final String url;
   // final Function(int? duration) callback;
   const StoryWidget({
@@ -12,6 +12,11 @@ class StoryWidget extends StatelessWidget {
     required this.url /* required this.callback */,
   });
 
+  @override
+  State<StoryWidget> createState() => _StoryWidgetState();
+}
+
+class _StoryWidgetState extends State<StoryWidget> {
   bool isImageUrl(String url) {
     final imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg'];
     final ext = url.split('.').last.toLowerCase();
@@ -25,20 +30,32 @@ class StoryWidget extends StatelessWidget {
   }
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (isImageUrl(widget.url)) {
+        context.read<StoryProvider>().updateDuration(3000);
+      } else if (isVideoUrl(widget.url)) {
+        context.read<StoryProvider>().updateDuration(30000);
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return isImageUrl(url)
+    return isImageUrl(widget.url)
         ? CachedNetworkImage(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            imageUrl: url,
+            imageUrl: widget.url,
             fit: BoxFit.cover,
           )
-        : isVideoUrl(url)
+        : isVideoUrl(widget.url)
         ? StoryVideoPlayer(
-            url: url,
+            url: widget.url,
             call: (duration) {
               // callback(duration);
-              Provider.of<StoryProvider>(context).updateDuration(duration);
+              context.read<StoryProvider>().updateDuration(duration);
             },
           )
         : SizedBox.shrink();
