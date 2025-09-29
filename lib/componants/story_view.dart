@@ -7,7 +7,18 @@ import '../widgets/linear_timer.dart';
 
 class StoryView extends StatefulWidget {
   final List<StoryWidget> storyChildren;
-  const StoryView({super.key, required this.storyChildren});
+  final double? progressBarHeight;
+  final Color? barColor;
+  final Color? barColorCompleted;
+  final Color? progressColor;
+  const StoryView({
+    super.key,
+    required this.storyChildren,
+    this.progressBarHeight,
+    this.barColor,
+    this.progressColor,
+    this.barColorCompleted,
+  });
 
   @override
   State<StoryView> createState() => _StoryViewState();
@@ -41,7 +52,6 @@ class _StoryViewState extends State<StoryView> {
                       state.updateCurrenIndex(value);
                       // if (widget.storyChildren.length == value + 1) {
                       //   log("LAST STORY");
-                      //   // Get.find<StoriesController>().setViewedStories(widget.id);
                       // }
                     },
                     itemBuilder: (BuildContext context, int index) {
@@ -57,6 +67,7 @@ class _StoryViewState extends State<StoryView> {
                                   widget.storyChildren.indexOf(e)
                               ? Expanded(
                                   child: LinearTimer(
+                                    progressBarHeight: widget.progressBarHeight,
                                     onTimerFinish: () {
                                       state.onNextStory(
                                         widget.storyChildren.length,
@@ -72,9 +83,11 @@ class _StoryViewState extends State<StoryView> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(right: 6),
                                     child: Container(
-                                      height: 3,
+                                      height: widget.progressBarHeight ?? 3,
                                       decoration: BoxDecoration(
-                                        color: Colors.white60,
+                                        color:
+                                            widget.barColorCompleted ??
+                                            Colors.white60,
                                         borderRadius: BorderRadius.circular(15),
                                       ),
                                     ),
@@ -84,9 +97,9 @@ class _StoryViewState extends State<StoryView> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(right: 6),
                                     child: Container(
-                                      height: 3,
+                                      height: widget.progressBarHeight ?? 3,
                                       decoration: BoxDecoration(
-                                        color: Colors.grey,
+                                        color: widget.barColor ?? Colors.grey,
                                         borderRadius: BorderRadius.circular(15),
                                       ),
                                     ),
@@ -126,85 +139,6 @@ class _StoryViewState extends State<StoryView> {
                         ),
                       ],
                     ),
-                  // if(!state.isDetailsLoading)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 20,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: 50,
-                          width: 50,
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColor,
-                            // gradient: LinearGradient(
-                            //   begin: Alignment.bottomCenter,
-                            //   end: Alignment.topCenter,
-                            //   colors: [
-                            //     Color(0xffF9CE34),
-                            //     Color(0xffEE2A7B),
-                            //     Color(0xff6228D7),
-                            //   ],
-                            // ),
-                            shape: BoxShape.circle,
-                          ),
-                          child: Center(
-                            /* child: ClipRRect(
-                              borderRadius: BorderRadius.circular(400),
-                              child: CachedNetworkImage(
-                                height: 45,
-                                width: 45,
-                                imageUrl: "",
-                                fit: BoxFit.cover,
-                              ),
-                            ), */
-                          ),
-                        ),
-                        SizedBox(width: 4),
-                        Text(
-                          "title",
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 14,
-                          ),
-                        ),
-                        const Spacer(),
-                        /* GetBuilder<StoriesController>(builder: (state) {
-                          return widget.storyChildren.isNotEmpty &&
-                                  widget.storyChildren[state.currentIndex].tag != "img"
-                              ? IconButton(
-                                  onPressed: () {
-                                    // state.manageVideoVolume();
-                                  },
-                                  icon: Icon(
-                                    state.isVideoMute
-                                        ? Icons.volume_off_rounded
-                                        : Icons.volume_up_rounded,
-                                    color: Colors.white,
-                                  ),
-                                )
-                              : SizedBox.shrink();
-                        }), */
-                        IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: Icon(Icons.clear, color: Colors.white),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  /* 
-                  shop me widget
-                  */
                   if (state.isDetailsLoading && state.pageNavi)
                     SizedBox(
                       height: double.infinity,

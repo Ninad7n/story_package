@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 
 class LinearTimer extends StatefulWidget {
   final int durationMiliseconds;
+  final double? progressBarHeight;
   final Function onTimerFinish;
 
   const LinearTimer({
     super.key,
     required this.durationMiliseconds,
     required this.onTimerFinish,
+    this.progressBarHeight,
   });
 
   @override
@@ -63,7 +65,7 @@ class _LinearTimerState extends State<LinearTimer> {
     return Padding(
       padding: const EdgeInsets.only(right: 6),
       child: Container(
-        height: 3.0,
+        height: widget.progressBarHeight ?? 3.0,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.0),

@@ -29,6 +29,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: StoryView(
+        progressBarHeight: 8.0,
         storyChildren: [
           StoryWidget(
             url:

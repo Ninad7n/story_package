@@ -6,8 +6,13 @@ import 'package:video_player/video_player.dart';
 class StoryVideoPlayer extends StatefulWidget {
   final String url;
   final Function(int? duration) call;
-  const StoryVideoPlayer({Key? key, required this.url, required this.call})
-    : super(key: key);
+  final Widget? videoPlaceholder;
+  const StoryVideoPlayer({
+    super.key,
+    required this.url,
+    required this.call,
+    this.videoPlaceholder,
+  });
 
   @override
   State<StoryVideoPlayer> createState() => _StoryVideoPlayerState();
@@ -65,7 +70,8 @@ class _StoryVideoPlayerState extends State<StoryVideoPlayer> {
             !vController!.value.isInitialized ||
             // ignore: unnecessary_null_comparison
             vController!.value.duration == null
-        ? Center(child: CircularProgressIndicator(color: Colors.red))
+        ? (widget.videoPlaceholder ??
+              Center(child: CircularProgressIndicator(color: Colors.red)))
         : Stack(
             children: [
               // StreamBuilder(

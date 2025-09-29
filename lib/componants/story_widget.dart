@@ -6,10 +6,13 @@ import 'package:story_package/widgets/video_player.dart';
 
 class StoryWidget extends StatefulWidget {
   final String url;
+  final Widget? videoPlaceholder;
+
   // final Function(int? duration) callback;
   const StoryWidget({
     super.key,
-    required this.url /* required this.callback */,
+    required this.url,
+    this.videoPlaceholder /* required this.callback */,
   });
 
   @override
