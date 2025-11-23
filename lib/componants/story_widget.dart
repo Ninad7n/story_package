@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:story_package/controller/story_provider.dart';
-import 'package:story_package/widgets/video_player.dart';
+import 'package:complete_story_view/controller/story_provider.dart';
+import 'package:complete_story_view/widgets/video_player.dart';
 
 class StoryWidget extends StatefulWidget {
   final String url;

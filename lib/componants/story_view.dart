@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:story_package/componants/story_widget.dart';
-import 'package:story_package/controller/story_provider.dart';
+import 'package:complete_story_view/componants/story_widget.dart';
+import 'package:complete_story_view/controller/story_provider.dart';
 
 import '../widgets/linear_timer.dart';
 

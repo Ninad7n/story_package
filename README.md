@@ -1,39 +1,136 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Story Page View for Flutter
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+A lightweight and customizable Flutter package for creating Instagram‑like story views. This package provides widgets to display multiple stories with built‑in progress bars, automatic transitions, and support for images and videos.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+---
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+## ✨ Features
 
-## Features
+* Display a list of story groups
+* Each group contains multiple story items
+* Supports image URLs (video support can be added similarly)
+* Built‑in progress indicator for each story
+* Fully customizable UI components
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+---
 
-## Getting started
+## 📦 Installation
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Add the following line to your **pubspec.yaml**:
 
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  story_page_view: ^1.0.0
 ```
 
-## Additional information
+Then run:
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```bash
+flutter pub get
+```
+
+---
+
+## 🚀 Usage
+
+Import the package:
+
+```dart
+import 'package:story_page_view/story_page_view.dart';
+```
+
+Use the `StoryListWidget` to display multiple story groups:
+
+```dart
+StoryListWidget(
+  storyViewList: [
+    StoryView(
+      progressBarHeight: 8.0,
+      storyChildren: [
+        StoryWidget(url: "https://picsum.photos/id/237/536/354.jpg"),
+        StoryWidget(
+          url:
+              "https://www.shutterstock.com/image-photo/demo-text-message-magnifying-glass-600nw-2491336635.jpg",
+        ),
+        // StoryWidget(
+        //   url:
+        //       "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        // ),
+      ],
+    ),
+    StoryView(
+      progressBarHeight: 8.0,
+      storyChildren: [
+        StoryWidget(
+          url:
+              "https://www.shutterstock.com/image-photo/demo-text-message-magnifying-glass-600nw-2491336635.jpg",
+        ),
+        StoryWidget(url: "https://picsum.photos/id/237/536/354.jpg"),
+      ],
+    ),
+  ],
+)
+```
+
+---
+
+## 📁 Widgets Overview
+
+### **StoryListWidget**
+
+A horizontal scrollable list of story groups.
+
+#### Properties:
+
+* `storyViewList`: List of story groups (`StoryView`).
+
+---
+
+### **StoryView**
+
+Represents a single story group with multiple items.
+
+#### Properties:
+
+* `storyChildren`: List of stories (`StoryWidget`).
+* `progressBarHeight`: Height of the progress indicator.
+
+---
+
+### **StoryWidget**
+
+A single story item — currently supports images.
+
+#### Properties:
+
+* `url`: Image or video URL.
+
+---
+
+## 🎨 Customization
+
+You can extend or modify the widgets to:
+
+* Add video playback
+* Change animation speed
+* Customize progress bar appearance
+* Add gestures (long press, swipe, pause, etc.)
+
+---
+
+## 📝 Notes
+
+* Network images require proper permissions on Android & iOS.
+* Video support is commented in your example but can be enabled by integrating a video player.
+
+---
+
+## 🤝 Contributing
+
+Pull requests are welcome! If you’d like to report bugs or request features, open an issue in the repository.
+
+---
+
+## 📄 License
+
+MIT License © 2025

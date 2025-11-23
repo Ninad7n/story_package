@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:story_package/controller/story_provider.dart';
-import 'package:story_package/story_package.dart';
+import 'package:complete_story_view/controller/story_provider.dart';
+
+import 'story_view.dart';
 
 class StoryListWidget extends StatelessWidget {
   final List<StoryView> storyViewList;
