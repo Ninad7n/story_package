@@ -1,4 +1,4 @@
-# Story Page View for Flutter
+# complete story view for Flutter
 
 A lightweight and customizable Flutter package for creating Instagram‑like story views. This package provides widgets to display multiple stories with built‑in progress bars, automatic transitions, and support for images and videos.
 
@@ -20,7 +20,7 @@ Add the following line to your **pubspec.yaml**:
 
 ```yaml
 dependencies:
-  story_page_view: ^1.0.0
+  complete_story_view: ^1.0.0
 ```
 
 Then run:
@@ -36,7 +36,7 @@ flutter pub get
 Import the package:
 
 ```dart
-import 'package:story_page_view/story_page_view.dart';
+import 'package:complete_story_view/story_package.dart';
 ```
 
 Use the `StoryListWidget` to display multiple story groups:
