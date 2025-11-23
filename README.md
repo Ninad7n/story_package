@@ -20,7 +20,7 @@ Add the following line to your **pubspec.yaml**:
 
 ```yaml
 dependencies:
-  complete_story_view: ^1.0.0
+  complete_story_view: ^0.0.1
 ```
 
 Then run:
