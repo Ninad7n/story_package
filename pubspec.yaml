@@ -1,7 +1,9 @@
 name: complete_story_view
 description: "A new Flutter package project for complete story view."
 version: 0.0.1
-homepage:
+homepage: https://github.com/Ninad7n/story_package.git
+repository: https://github.com/Ninad7n/story_package.git
+issue_tracker: https://github.com/Ninad7n/story_package/issues
 
 environment:
   sdk: ^3.8.1
