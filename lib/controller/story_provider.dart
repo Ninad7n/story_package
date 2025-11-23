@@ -1,16 +1,18 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class StoryProvider extends ChangeNotifier {
+  final int lengthOfStoryPages;
+  StoryProvider({required this.lengthOfStoryPages});
   String storyPrefKey = "viewed_stories";
   bool pageNavi = false;
   bool isVideoMute = false;
   bool isDetailsLoading = false;
   int currentIndex = 0;
   int durationCurrentStory = 3000;
-  int currentProductScrollIndex = 0;
   PageController innerPageController = PageController();
-  List<String> viewedData = [];
-  // VideoPlayerController? vController;
+  PageController outerPageController = PageController();
 
   updateCurrenIndex(value) {
     currentIndex = value;
@@ -22,12 +24,9 @@ class StoryProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  onPrevStory() {
+  onPrevStory(childrenLength) {
     if (currentIndex == 0) {
-      innerPageController.previousPage(
-        duration: Duration(milliseconds: 100),
-        curve: Curves.linear,
-      );
+      onFirstStoryTapped();
     } else {
       innerPageController.previousPage(
         duration: Duration(milliseconds: 100),
@@ -39,34 +38,41 @@ class StoryProvider extends ChangeNotifier {
   }
 
   onNextStory(childrenLength) {
-    if (childrenLength == (currentIndex + 1)) {
-      innerPageController.nextPage(
-        duration: Duration(milliseconds: 100),
-        curve: Curves.linear,
-      );
-    } else {
-      innerPageController.nextPage(
-        duration: Duration(milliseconds: 100),
-        curve: Curves.linear,
-      );
+    try {
+      if (childrenLength == currentIndex + 1) {
+        onStoryFinished();
+      } else {
+        innerPageController.nextPage(
+          duration: Duration(milliseconds: 100),
+          curve: Curves.linear,
+        );
+      }
+    } catch (e) {
+      log('$e', name: 'ERROR AT onNextStory');
     }
-    durationCurrentStory = 0;
     notifyListeners();
   }
 
   onStoryFinished() {
-    //check is last story
-    /* if (widget.storyChildren.indexOf(e) ==
-        widget.storyChildren.length - 1) {
-      if (ModalRoute.of(context)?.isCurrent ??
-          false)
-        Navigator.pop(context);
-    } */
-    innerPageController.nextPage(
+    log("$lengthOfStoryPages ${outerPageController.page}");
+    if (lengthOfStoryPages != outerPageController.page! + 1) {
+      outerPageController.nextPage(
+        duration: Duration(milliseconds: 100),
+        curve: Curves.linear,
+      );
+      currentIndex = 0;
+    }
+    notifyListeners();
+  }
+
+  onFirstStoryTapped() {
+    // updateDuration(0);
+    currentIndex = 0;
+    outerPageController.previousPage(
       duration: Duration(milliseconds: 100),
       curve: Curves.linear,
     );
-    durationCurrentStory = 0;
+    notifyListeners();
   }
 
   int getDuration(tag) {

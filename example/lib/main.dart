@@ -28,17 +28,31 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: StoryView(
-        progressBarHeight: 8.0,
-        storyChildren: [
-          StoryWidget(
-            url:
-                "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      body: StoryListWidget(
+        storyViewList: [
+          StoryView(
+            progressBarHeight: 8.0,
+            storyChildren: [
+              StoryWidget(url: "https://picsum.photos/id/237/536/354.jpg"),
+              StoryWidget(
+                url:
+                    "https://www.shutterstock.com/image-photo/demo-text-message-magnifying-glass-600nw-2491336635.jpg",
+              ),
+              // StoryWidget(
+              //   url:
+              //       "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+              // ),
+            ],
           ),
-          StoryWidget(url: "https://picsum.photos/id/237/536/354.jpg"),
-          StoryWidget(
-            url:
-                "https://www.shutterstock.com/image-photo/demo-text-message-magnifying-glass-600nw-2491336635.jpg",
+          StoryView(
+            progressBarHeight: 8.0,
+            storyChildren: [
+              StoryWidget(
+                url:
+                    "https://www.shutterstock.com/image-photo/demo-text-message-magnifying-glass-600nw-2491336635.jpg",
+              ),
+              StoryWidget(url: "https://picsum.photos/id/237/536/354.jpg"),
+            ],
           ),
         ],
       ),
