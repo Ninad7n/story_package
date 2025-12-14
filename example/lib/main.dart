@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
@@ -33,25 +34,18 @@ class MyHomePage extends StatelessWidget {
           StoryView(
             progressBarHeight: 8.0,
             storyChildren: [
-              StoryWidget(url: "https://picsum.photos/id/237/536/354.jpg"),
-              StoryWidget(
-                url:
-                    "https://www.shutterstock.com/image-photo/demo-text-message-magnifying-glass-600nw-2491336635.jpg",
-              ),
-              // StoryWidget(
-              //   url:
-              //       "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-              // ),
+              StoryWidget(url: "", storyType: StoryType.networkImage),
+              StoryWidget(url: "", storyType: StoryType.networkImage),
             ],
           ),
           StoryView(
             progressBarHeight: 8.0,
             storyChildren: [
-              StoryWidget(
-                url:
-                    "https://www.shutterstock.com/image-photo/demo-text-message-magnifying-glass-600nw-2491336635.jpg",
-              ),
-              StoryWidget(url: "https://picsum.photos/id/237/536/354.jpg"),
+              StoryWidget(url: "", storyType: StoryType.networkVideo),
+              StoryWidget(url: "", storyType: StoryType.networkImage),
+              StoryWidget(url: "", storyType: StoryType.networkImage),
+              StoryWidget(url: "", storyType: StoryType.networkImage),
+              StoryWidget(url: "", storyType: StoryType.networkImage),
             ],
           ),
         ],

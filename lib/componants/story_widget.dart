@@ -1,18 +1,25 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:complete_story_view/controller/story_provider.dart';
 import 'package:complete_story_view/widgets/video_player.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+///set type of your story i.e image or video
+enum StoryType { networkImage, networkVideo } //assetImage, assetVideo
 
 class StoryWidget extends StatefulWidget {
   final String url;
   final Widget? videoPlaceholder;
+  final StoryType? storyType;
+  final BoxFit? imageFit;
 
   // final Function(int? duration) callback;
   const StoryWidget({
     super.key,
     required this.url,
-    this.videoPlaceholder /* required this.callback */,
+    this.videoPlaceholder,
+    this.storyType,
+    this.imageFit,
   });
 
   @override
@@ -46,14 +53,14 @@ class _StoryWidgetState extends State<StoryWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return isImageUrl(widget.url)
+    return widget.storyType == StoryType.networkImage || isImageUrl(widget.url)
         ? CachedNetworkImage(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             imageUrl: widget.url,
-            fit: BoxFit.cover,
+            fit: widget.imageFit ?? BoxFit.cover,
           )
-        : isVideoUrl(widget.url)
+        : widget.storyType == StoryType.networkVideo || isVideoUrl(widget.url)
         ? StoryVideoPlayer(
             url: widget.url,
             call: (duration) {
@@ -61,6 +68,11 @@ class _StoryWidgetState extends State<StoryWidget> {
               context.read<StoryProvider>().updateDuration(duration);
             },
           )
-        : SizedBox.shrink();
+        : CachedNetworkImage(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            imageUrl: widget.url,
+            fit: widget.imageFit ?? BoxFit.cover,
+          );
   }
 }

@@ -1,6 +1,6 @@
 name: complete_story_view
 description: "A Flutter package for creating smooth, full-screen story views with customizable animations and controls."
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/Ninad7n/story_package.git
 repository: https://github.com/Ninad7n/story_package.git
 issue_tracker: https://github.com/Ninad7n/story_package/issues
