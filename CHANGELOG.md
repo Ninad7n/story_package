@@ -1,3 +1,4 @@
-## 0.0.1
+## 0.0.2
 
-* TODO: Describe initial release.
+* fix: story widget type bug
+use StoryType to instruct type of the story i.e image/video.
