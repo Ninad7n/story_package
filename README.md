@@ -3,6 +3,9 @@
 A lightweight and customizable Flutter package for creating Instagram‑like story views. This package provides widgets to display multiple stories with built‑in progress bars, automatic transitions, and support for images and videos.
 
 ---
+<img width="1080" height="2340" alt="Screenshot_1765699096" src="https://github.com/user-attachments/assets/bb838001-38d2-4f5b-a78d-79b460ddc682" />
+<img width="1080" height="2340" alt="Screenshot_1765699040" src="https://github.com/user-attachments/assets/cc344db9-2275-43e4-bae5-f61d37ee70c7" />
+<img width="1080" height="2340" alt="Screenshot_1765699055" src="https://github.com/user-attachments/assets/3752d11c-93f1-4476-a3cd-ea84257b0537" />
 
 ## ✨ Features
 
