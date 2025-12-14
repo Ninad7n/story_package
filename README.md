@@ -17,23 +17,6 @@ A lightweight and customizable Flutter package for creating Instagram‑like sto
 
 ---
 
-## 📦 Installation
-
-Add the following line to your **pubspec.yaml**:
-
-```yaml
-dependencies:
-  complete_story_view: ^0.0.1
-```
-
-Then run:
-
-```bash
-flutter pub get
-```
-
----
-
 ## 🚀 Usage
 
 Import the package:
