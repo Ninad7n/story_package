@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:complete_story_view/controller/story_provider.dart';
 import 'package:complete_story_view/widgets/video_player.dart';
 import 'package:flutter/material.dart';
@@ -54,11 +53,18 @@ class _StoryWidgetState extends State<StoryWidget> {
   @override
   Widget build(BuildContext context) {
     return widget.storyType == StoryType.networkImage || isImageUrl(widget.url)
-        ? CachedNetworkImage(
+        ? Image(
+            image: NetworkImage(widget.url),
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            imageUrl: widget.url,
             fit: widget.imageFit ?? BoxFit.cover,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) return child;
+              return const Center(child: CircularProgressIndicator());
+            },
+            errorBuilder: (context, error, stackTrace) {
+              return const Center(child: Icon(Icons.error, size: 40));
+            },
           )
         : widget.storyType == StoryType.networkVideo || isVideoUrl(widget.url)
         ? StoryVideoPlayer(
@@ -68,11 +74,19 @@ class _StoryWidgetState extends State<StoryWidget> {
               context.read<StoryProvider>().updateDuration(duration);
             },
           )
-        : CachedNetworkImage(
+        : Image(
+            image: NetworkImage(widget.url),
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            imageUrl: widget.url,
             fit: widget.imageFit ?? BoxFit.cover,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) return child;
+
+              return const Center(child: CircularProgressIndicator());
+            },
+            errorBuilder: (context, error, stackTrace) {
+              return const Center(child: Icon(Icons.error, size: 40));
+            },
           );
   }
 }
