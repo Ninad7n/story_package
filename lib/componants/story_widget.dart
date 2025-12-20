@@ -1,7 +1,6 @@
-import 'package:complete_story_view/controller/story_provider.dart';
+import 'package:complete_story_view/controller/story_inherited_notifier.dart';
 import 'package:complete_story_view/widgets/video_player.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 ///set type of your story i.e image or video
 enum StoryType { networkImage, networkVideo } //assetImage, assetVideo
@@ -9,7 +8,9 @@ enum StoryType { networkImage, networkVideo } //assetImage, assetVideo
 class StoryWidget extends StatefulWidget {
   final String url;
   final Widget? videoPlaceholder;
-  final StoryType? storyType;
+
+  ///set type of your story i.e image or video
+  final StoryType storyType;
   final BoxFit? imageFit;
 
   // final Function(int? duration) callback;
@@ -17,7 +18,7 @@ class StoryWidget extends StatefulWidget {
     super.key,
     required this.url,
     this.videoPlaceholder,
-    this.storyType,
+    required this.storyType,
     this.imageFit,
   });
 
@@ -42,11 +43,11 @@ class _StoryWidgetState extends State<StoryWidget> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (isImageUrl(widget.url)) {
-        context.read<StoryProvider>().updateDuration(3000);
-      } else if (isVideoUrl(widget.url)) {
-        context.read<StoryProvider>().updateDuration(30000);
-      }
+      widget.storyType == StoryType.networkImage
+          ? StoryScope.of(context).updateDuration(
+              StoryScope.of(context).getDefinedImageStoryDuration,
+            )
+          : StoryScope.of(context).updateDuration(30000);
     });
   }
 
@@ -71,7 +72,7 @@ class _StoryWidgetState extends State<StoryWidget> {
             url: widget.url,
             call: (duration) {
               // callback(duration);
-              context.read<StoryProvider>().updateDuration(duration);
+              StoryScope.of(context).updateDuration(duration);
             },
           )
         : Image(

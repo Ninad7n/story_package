@@ -30,6 +30,10 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: StoryListWidget(
+        imageStoryDuration: 4000,
+        onComplete: () {
+          //
+        },
         storyViewList: [
           StoryView(
             progressBarHeight: 8.0,
@@ -44,6 +48,11 @@ class MyHomePage extends StatelessWidget {
               StoryWidget(url: "", storyType: StoryType.networkVideo),
               StoryWidget(url: "", storyType: StoryType.networkImage),
               StoryWidget(url: "", storyType: StoryType.networkImage),
+            ],
+          ),
+          StoryView(
+            progressBarHeight: 8.0,
+            storyChildren: [
               StoryWidget(url: "", storyType: StoryType.networkImage),
               StoryWidget(url: "", storyType: StoryType.networkImage),
             ],
